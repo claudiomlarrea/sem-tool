@@ -8,7 +8,10 @@ from pathlib import Path
 import pandas as pd
 from plspm.plspm import Plspm
 
+from sem_tool.plsem.plspm_compat import apply_plspm_pandas_patch
 from sem_tool.io import excel as xl
+
+apply_plspm_pandas_patch()
 from sem_tool.io.schema import SHEET_MODELO_PLS
 from sem_tool.plsem import metrics as met
 from sem_tool.plsem.regression import pls_regression_table
@@ -50,13 +53,13 @@ def run_plsem(
     processes: int = 2,
 ) -> PlsSemResult:
     path = Path(workbook_path)
-    run_descriptives_for_workbook(path, columns=None)
     data = xl.read_data(path)
     modelo = xl.read_sheet(path, SHEET_MODELO_PLS)
     blocks_pre, paths_pre = parse_pls_blocks_indicators(modelo)
+    all_items = [it for items in blocks_pre.values() for it in items]
+    run_descriptives_for_workbook(path, columns=all_items)
     catalog = read_indicadores_catalog(path)
     hipotesis = read_hipotesis(path)
-    all_items = [it for items in blocks_pre.values() for it in items]
 
     min_obs = get_min_observations(path)
     method_report = validate_pls_model(blocks_pre, paths_pre, hipotesis)
@@ -73,13 +76,14 @@ def run_plsem(
     if bootstraps < 100:
         bootstraps = 500
 
-    n_cases = int(data[all_items].dropna(how="any").shape[0])
+    model_data = data[all_items].dropna(how="any")
+    n_cases = int(model_data.shape[0])
     use_bootstrap = n_cases >= 10
     if not use_bootstrap:
         bootstraps = 0
 
     pls = Plspm(
-        data=data,
+        data=model_data,
         config=spec.config,
         bootstrap=use_bootstrap,
         bootstrap_iterations=max(bootstraps, 100) if use_bootstrap else 100,
@@ -96,9 +100,9 @@ def run_plsem(
 
     ave_cr = met.compute_ave_cr(outer, blocks)
     fl = met.fornell_larcker(pls.scores(), ave_cr)
-    htmt = met.htmt_matrix(data, blocks)
+    htmt = met.htmt_matrix(model_data, blocks)
     f2 = met.f_squared_from_effects(effects, inner_summary)
-    vif = met.vif_formative(data, blocks, modes)
+    vif = met.vif_formative(model_data, blocks, modes)
 
     r2 = inner_summary.copy()
     if "type" in r2.columns:

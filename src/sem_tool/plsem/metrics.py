@@ -72,7 +72,8 @@ def htmt_matrix(data: pd.DataFrame, blocks: dict[str, list[str]]) -> pd.DataFram
             val = hetero / denom if denom and not np.isnan(denom) else np.nan
             mat.loc[lv_a, lv_b] = val
             mat.loc[lv_b, lv_a] = val
-    np.fill_diagonal(mat.values, np.nan)
+    for lv in lvs:
+        mat.loc[lv, lv] = np.nan
     return mat
 
 

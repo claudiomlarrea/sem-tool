@@ -37,7 +37,7 @@ from sem_tool.io.schema import SHEET_MODELO_CB
 from sem_tool.spec.cb_syntax import parse_modelo_cb
 from sem_tool.stats.descriptives import (
     compute_descriptives,
-    export_descriptives_to_workbook,
+    run_descriptives_for_workbook,
 )
 from sem_tool.stats.ols_report import reports_to_workbook_sheets
 from sem_tool.stats.structural_ols import (
@@ -98,8 +98,8 @@ def run_cbsem(workbook_path: Path) -> CbSemResult:
     method_report.raise_if_errors()
 
     # Matriz S: covarianzas entre cada par de ítems (base del análisis factorial / EQS)
+    run_descriptives_for_workbook(path, columns=all_items)
     desc = compute_descriptives(data, columns=all_items, min_obs_per_variable=min_obs)
-    export_descriptives_to_workbook(path, desc)
     cov_matrix = desc.covarianza.loc[all_items, all_items]
 
     model = Model(syntax)

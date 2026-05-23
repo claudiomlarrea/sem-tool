@@ -31,9 +31,9 @@ streamlit run streamlit_app.py
 
 | Campo | Valor |
 |-------|--------|
-| Main file | `streamlit_app.py` |
+| Main file | **`streamlit_app.py`** (no `scripts/build_examples.py`) |
 | Requirements | `requirements.txt` |
-| Python | 3.9+ |
+| Python | **3.11** (archivo `.python-version`; evitar 3.14 con `plspm`) |
 
 **Notas**
 
