@@ -194,13 +194,13 @@ def _tab_ayuda() -> None:
         git add .
         git commit -m "sem-tool: CLI, Streamlit y documentación"
         git branch -M main
-        git remote add origin https://github.com/SU_USUARIO/sem-tool.git
+        git remote add origin https://github.com/claudiomlarrea/sem-tool.git
         git push -u origin main
         ```
 
         ### App en Streamlit Cloud (gratis)
         1. [share.streamlit.io](https://share.streamlit.io) → **New app**
-        2. Repositorio: `SU_USUARIO/sem-tool`, rama `main`
+        2. Repositorio: `claudiomlarrea/sem-tool`, rama `main`
         3. **Main file path**: `streamlit_app.py`
         4. Python 3.9+; dependencias en `requirements.txt`
 

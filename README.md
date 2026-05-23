@@ -408,7 +408,7 @@ cd /Users/claudiolarrea/Projects/sem-tool
 git add .
 git commit -m "sem-tool: CLI, Streamlit y CI"
 git branch -M main
-git remote add origin https://github.com/SU_USUARIO/sem-tool.git
+git remote add origin https://github.com/claudiomlarrea/sem-tool.git
 git push -u origin main
 ```
 
@@ -427,7 +427,7 @@ Abre `http://localhost:8501`: descargar plantilla, subir Excel, ejecutar CB/PLS 
 
 1. Repositorio en GitHub (público o privado con permisos).
 2. [share.streamlit.io](https://share.streamlit.io) → **Create app**.
-3. **Repository**: `SU_USUARIO/sem-tool`, **Branch**: `main`, **Main file**: `streamlit_app.py`.
+3. **Repository**: `claudiomlarrea/sem-tool`, **Branch**: `main`, **Main file**: `streamlit_app.py`.
 4. **Requirements file**: `requirements.txt` (incluye `-e .` y `streamlit`).
 
 Guía detallada: [`docs/DEPLOY.md`](docs/DEPLOY.md).

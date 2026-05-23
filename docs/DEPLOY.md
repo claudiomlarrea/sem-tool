@@ -7,7 +7,7 @@ git init   # solo si aún no hay repo
 git add .
 git commit -m "sem-tool: CB-SEM, PLS-SEM, Streamlit"
 git branch -M main
-git remote add origin https://github.com/SU_USUARIO/sem-tool.git
+git remote add origin https://github.com/claudiomlarrea/sem-tool.git
 git push -u origin main
 ```
 
