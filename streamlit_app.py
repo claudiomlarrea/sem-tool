@@ -56,7 +56,7 @@ def _sidebar() -> None:
         3. Ejecutar análisis
         4. Descargar Excel con resultados
 
-        [Repositorio](https://github.com/) · Taller UIC Frederic Marimon
+        [Repositorio GitHub](https://github.com/claudiomlarrea/sem-tool) · Taller UIC Frederic Marimon
         """
     )
 
