@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Generate example workbooks: Calidad (F1) → Satisfacción (F2)."""
+"""Generate example workbooks: Calidad (F1) → Satisfacción (F2).
+
+NO usar como entrada de Streamlit Cloud — solo CLI:
+    python scripts/build_examples.py
+"""
 
 from __future__ import annotations
 

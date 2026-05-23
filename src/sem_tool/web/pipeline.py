@@ -40,10 +40,21 @@ def create_template_bytes(
     mode: InitMode = "both",
     *,
     include_sample: bool = True,
+    profile: str = "frederic",
+    n_respondents: int = 20,
 ) -> bytes:
     with tempfile.TemporaryDirectory() as tmp:
-        path = Path(tmp) / "plantilla_sem.xlsx"
-        xl.create_template(path, mode, include_sample=include_sample)
+        if profile == "restaurante":
+            path = Path(tmp) / "encuesta_restaurante.xlsx"
+            xl.create_restaurant_survey_workbook(
+                path,
+                n_respondents=n_respondents,
+                include_data=include_sample,
+                min_observations=min(15, n_respondents) if include_sample else 15,
+            )
+        else:
+            path = Path(tmp) / "plantilla_sem.xlsx"
+            xl.create_template(path, mode, include_sample=include_sample)
         return path.read_bytes()
 
 

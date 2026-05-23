@@ -112,7 +112,8 @@ def run_plsem(
     regresion = pls_regression_table(pls, inner_summary)
 
     paths_pairs = [(r["origen"], r["destino"]) for _, r in paths_long.iterrows()]
-    ols_reports = ols_reports_from_scores(pls.scores(), paths_pairs)
+    ols_min = min(min_obs, max(10, n_cases))
+    ols_reports = ols_reports_from_scores(pls.scores(), paths_pairs, min_n=ols_min)
     ols_sheets = reports_to_workbook_sheets(ols_reports)
 
     return PlsSemResult(

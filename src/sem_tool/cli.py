@@ -53,6 +53,37 @@ def init_cmd(
         typer.echo(f"Plantilla vacía: {output.resolve()} — rellene hoja Datos antes de analizar.")
 
 
+@app.command("ejemplo-restaurante")
+def ejemplo_restaurante_cmd(
+    output: Path = typer.Option(
+        Path("encuesta_restaurante_20.xlsx"),
+        "--output",
+        "-o",
+        help="Archivo Excel de salida",
+    ),
+    n: int = typer.Option(20, "--n", help="Número de clientes (filas en Datos)"),
+    vacia: bool = typer.Option(
+        False,
+        "--vacia/--con-datos",
+        help="Solo plantilla sin filas de respuesta",
+    ),
+) -> None:
+    """Plantilla restaurante: 20 clientes, calidad → satisfacción (Likert 1–5)."""
+    xl.create_restaurant_survey_workbook(
+        output,
+        n_respondents=n,
+        include_data=not vacia,
+        min_observations=min(15, n) if not vacia else 15,
+    )
+    if vacia:
+        typer.echo(f"Plantilla vacía restaurante: {output.resolve()}")
+    else:
+        typer.echo(
+            f"Encuesta ejemplo (n={n}): {output.resolve()}\n"
+            f"  python3 -m sem_tool run-all {output.name} --bootstraps 200 --processes 2"
+        )
+
+
 @app.command("descriptivos")
 def descriptivos_cmd(
     workbook: Path = typer.Argument(..., help="Excel con hoja Datos"),

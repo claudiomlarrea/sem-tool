@@ -63,25 +63,46 @@ def _sidebar() -> None:
 
 def _tab_plantilla() -> None:
     st.header("Plantilla Excel")
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     with col1:
+        perfil = st.selectbox(
+            "Perfil",
+            ["frederic", "restaurante"],
+            format_func=lambda p: {
+                "frederic": "Taller UIC (Calidad → Satisfacción)",
+                "restaurante": "Restaurante (20 clientes)",
+            }[p],
+        )
+    with col2:
         mode = st.selectbox("Modo", ["both", "cb", "pls"], format_func=lambda m: {
             "both": "CB + PLS",
             "cb": "Solo CB-SEM",
             "pls": "Solo PLS-SEM",
         }[m])
-    with col2:
+    with col3:
         sample = st.radio(
             "Datos",
             [True, False],
-            format_func=lambda x: "Con 200 casos de ejemplo" if x else "Vacía (solo encabezados)",
+            format_func=lambda x: (
+                "Con datos de ejemplo" if x else "Vacía (solo encabezados)"
+            ),
             horizontal=True,
         )
 
     if st.button("Generar plantilla", type="primary"):
-        data = create_template_bytes(mode=mode, include_sample=sample)  # type: ignore[arg-type]
+        data = create_template_bytes(
+            mode=mode,  # type: ignore[arg-type]
+            include_sample=sample,
+            profile=perfil,
+            n_respondents=20,
+        )
         st.session_state["template_bytes"] = data
-        st.session_state["template_name"] = f"plantilla_{mode}.xlsx"
+        name = (
+            "encuesta_restaurante_20.xlsx"
+            if perfil == "restaurante" and sample
+            else f"plantilla_{perfil}_{mode}.xlsx"
+        )
+        st.session_state["template_name"] = name
         st.success("Plantilla lista para descargar.")
 
     if "template_bytes" in st.session_state:

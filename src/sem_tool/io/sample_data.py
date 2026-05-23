@@ -58,6 +58,93 @@ def frederic_modelo_pls() -> pd.DataFrame:
     )
 
 
+def restaurant_datos(n: int = 20, seed: int = 2024) -> pd.DataFrame:
+    """20 clientes — calidad percibida → satisfacción (restaurante, Likert 1–5)."""
+    rng = np.random.default_rng(seed)
+    calidad = rng.normal(loc=0.3, scale=1.0, size=n)
+    satisfaccion = 0.6 * calidad + rng.normal(scale=0.55, size=n)
+    frame = likert_from_latent(rng, n, calidad, "CAL", n_items=3, n_categories=5)
+    frame = frame.join(
+        likert_from_latent(rng, n, satisfaccion, "SAT", n_items=3, n_categories=5)
+    )
+    frame.insert(0, "cliente_id", np.arange(1, n + 1))
+    return frame
+
+
+def restaurant_indicadores() -> pd.DataFrame:
+    rows = [
+        {
+            "constructo": "Calidad",
+            "indicador": "CAL1",
+            "escala": "Likert",
+            "puntos": 5,
+            "referencia": "Adaptado SERVQUAL — dimensión tangibles/alimentos",
+            "notas": "La comida del restaurante es de buena calidad",
+        },
+        {
+            "constructo": "Calidad",
+            "indicador": "CAL2",
+            "escala": "Likert",
+            "puntos": 5,
+            "referencia": "Adaptado SERVQUAL — dimensión servicio",
+            "notas": "El personal es amable y atento",
+        },
+        {
+            "constructo": "Calidad",
+            "indicador": "CAL3",
+            "escala": "Likert",
+            "puntos": 5,
+            "referencia": "Adaptado SERVQUAL — ambiente",
+            "notas": "El local está limpio y es agradable",
+        },
+        {
+            "constructo": "Satisfaccion",
+            "indicador": "SAT1",
+            "escala": "Likert",
+            "puntos": 5,
+            "referencia": "Satisfacción global — literatura hospitalidad",
+            "notas": "En general estoy satisfecho con mi experiencia en el restaurante",
+        },
+        {
+            "constructo": "Satisfaccion",
+            "indicador": "SAT2",
+            "escala": "Likert",
+            "puntos": 5,
+            "referencia": "Intención de recomendación (NPS / lealtad)",
+            "notas": "Recomendaría este restaurante a familiares o amigos",
+        },
+        {
+            "constructo": "Satisfaccion",
+            "indicador": "SAT3",
+            "escala": "Likert",
+            "puntos": 5,
+            "referencia": "Intención de repurchase",
+            "notas": "Volvería a visitar este restaurante",
+        },
+    ]
+    return pd.DataFrame(rows)
+
+
+def restaurant_hipotesis() -> pd.DataFrame:
+    return pd.DataFrame(
+        [
+            {
+                "origen": "Calidad",
+                "destino": "Satisfaccion",
+                "hipotesis": (
+                    "H1: La calidad percibida del restaurante "
+                    "impacta positivamente la satisfacción del cliente"
+                ),
+                "referencia": "Parasuraman et al. (1988); Oliver (1997) — adaptar cita",
+                "argumento": (
+                    "Mayor calidad en comida, servicio y ambiente se asocia "
+                    "con mayor satisfacción y lealtad en restauración."
+                ),
+            }
+        ]
+    )
+
+
 def frederic_indicadores() -> pd.DataFrame:
     rows = []
     for construct, prefix, ref in [

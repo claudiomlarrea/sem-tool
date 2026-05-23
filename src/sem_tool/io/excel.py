@@ -225,6 +225,132 @@ def create_template(
     wb.save(path)
 
 
+def create_restaurant_survey_workbook(
+    output_path: Path,
+    *,
+    n_respondents: int = 20,
+    include_data: bool = True,
+    min_observations: int = 15,
+) -> None:
+    """Plantilla restaurante: calidad percibida → satisfacción (demo n=20)."""
+    from sem_tool.io.sample_data import (
+        frederic_modelo_cb,
+        frederic_modelo_pls,
+        restaurant_datos,
+        restaurant_hipotesis,
+        restaurant_indicadores,
+    )
+
+    path = Path(output_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    wb = Workbook()
+    wb.remove(wb.active)
+
+    ws_items = wb.create_sheet("Items_Encuesta")
+    ws_items.append(
+        ["indicador", "constructo", "pregunta", "escala", "puntos"]
+    )
+    for _, row in restaurant_indicadores().iterrows():
+        ws_items.append(
+            [
+                row["indicador"],
+                row["constructo"],
+                row["notas"],
+                row["escala"],
+                row["puntos"],
+            ]
+        )
+
+    ws = wb.create_sheet(sch.SHEET_DATOS)
+    if include_data:
+        datos = restaurant_datos(n=n_respondents)
+        ws.append(list(datos.columns))
+        for row in datos.itertuples(index=False, name=None):
+            ws.append(list(row))
+    else:
+        ws.append(["cliente_id", "CAL1", "CAL2", "CAL3", "SAT1", "SAT2", "SAT3"])
+        ws.append([])
+        ws.append(
+            [
+                "← Pegue respuestas (1 fila = 1 cliente). "
+                "Likert 1–5. Mínimo 3 ítems por constructo."
+            ]
+        )
+
+    ws_cb = wb.create_sheet(sch.SHEET_MODELO_CB)
+    mcb = frederic_modelo_cb()
+    ws_cb.append(list(mcb.columns))
+    for row in mcb.itertuples(index=False, name=None):
+        ws_cb.append(list(row))
+
+    ws_spls = wb.create_sheet("Sistema_SmartPLS")
+    for title, df in (
+        ("Flujo", sistema_smartpls_catalog()),
+        ("PLS_vs_CB", smartpls_vs_cbsem()),
+        ("Columnas_Modelo_PLS", modelo_pls_columnas()),
+    ):
+        ws_spls.append([title])
+        ws_spls.append(list(df.columns))
+        for _, row in df.iterrows():
+            ws_spls.append(list(row))
+        ws_spls.append([])
+
+    ws_pls = wb.create_sheet(sch.SHEET_MODELO_PLS)
+    mpl = frederic_modelo_pls()
+    ws_pls.append(list(mpl.columns))
+    for row in mpl.itertuples(index=False, name=None):
+        ws_pls.append(list(row))
+
+    ws_h = wb.create_sheet(sch.SHEET_HIPOTESIS)
+    hip = restaurant_hipotesis()
+    ws_h.append(list(hip.columns))
+    for row in hip.itertuples(index=False, name=None):
+        ws_h.append(list(row))
+
+    ws_i = wb.create_sheet(sch.SHEET_INDICADORES)
+    ind = restaurant_indicadores()
+    ws_i.append(list(ind.columns))
+    for row in ind.itertuples(index=False, name=None):
+        ws_i.append(list(row))
+
+    _add_legend_sheet(wb)
+    _add_diagram_sheet(wb)
+    _add_parameters_rules_sheet(wb)
+    _add_frederic_curriculum_sheets(wb)
+    _add_modern_sem_sheets(wb)
+
+    ws_nota = wb.create_sheet("Nota_Muestra")
+    ws_nota.append(["concepto", "valor", "comentario"])
+    ws_nota.append(
+        [
+            "casos",
+            n_respondents if include_data else 0,
+            "Ejemplo pedagógico; para tesis use N>=100",
+        ]
+    )
+    ws_nota.append(
+        [
+            "modelo",
+            "Calidad → Satisfaccion",
+            "CB-SEM y PLS-SEM en sem-tool",
+        ]
+    )
+
+    ws_cfg = wb.create_sheet(sch.SHEET_CONFIG)
+    ws_cfg.append(["clave", "valor"])
+    ws_cfg.append(["observaciones_minimas", min_observations])
+    ws_cfg.append(["bootstraps", 200])
+    ws_cfg.append(["procesos_bootstrap", 2])
+    ws_cfg.append(
+        [
+            "contexto",
+            "Encuesta restaurante — calidad percibida y satisfacción",
+        ]
+    )
+
+    wb.save(path)
+
+
 def _add_methodology_sheets(wb: Workbook, include_sample: bool = True) -> None:
     """Hipótesis fundamentada y catálogo de ítems (literatura + escala)."""
     ws_h = wb.create_sheet(sch.SHEET_HIPOTESIS)

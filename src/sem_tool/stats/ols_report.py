@@ -26,6 +26,7 @@ def ols_simple_regression(
     x: pd.Series,
     name_y: str = "Y",
     name_x: str = "Variable X 1",
+    min_n: int = 100,
 ) -> OlsRegressionReport:
     """
     Regresión lineal simple y = a + b*x con tablas ANOVA y coeficientes.
@@ -33,7 +34,6 @@ def ols_simple_regression(
     Replica el formato habitual de Excel / SPSS en español.
     """
     df = pd.concat([y.rename("y"), x.rename("x")], axis=1).dropna()
-    min_n = 100
     if len(df) < min_n:
         raise ValueError(
             f"Se necesitan al menos {min_n} observaciones para {name_y} ~ {name_x} "

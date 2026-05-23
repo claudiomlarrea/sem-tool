@@ -140,7 +140,8 @@ def run_cbsem(workbook_path: Path) -> CbSemResult:
     try:
         scores = model.predict_factors(complete_cases[all_items])
         paths = structural_paths_from_beta(mats.get("Beta"))
-        reports = ols_reports_from_scores(scores, paths)
+        ols_min = min(min_obs, max(10, len(complete_cases)))
+        reports = ols_reports_from_scores(scores, paths, min_n=ols_min)
         ols_sheets = reports_to_workbook_sheets(reports)
     except Exception:
         pass

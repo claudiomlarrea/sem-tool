@@ -10,6 +10,7 @@ from sem_tool.stats.ols_report import OlsRegressionReport, ols_simple_regression
 def ols_reports_from_scores(
     scores: pd.DataFrame,
     paths: list[tuple[str, str]],
+    min_n: int = 100,
 ) -> list[OlsRegressionReport]:
     """
     Una regresión y = a + b*x por cada ruta estructural, usando scores latentes.
@@ -25,6 +26,7 @@ def ols_reports_from_scores(
             scores[x_name],
             name_y=y_name,
             name_x=x_name,
+            min_n=min_n,
         )
         reports.append(rep)
     return reports
