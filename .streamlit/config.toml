@@ -1,8 +1,9 @@
 [theme]
-primaryColor = "#2563eb"
-backgroundColor = "#0e1117"
-secondaryBackgroundColor = "#262730"
-textColor = "#fafafa"
+# UCCuyo — Manual de identidad visual v1.0 (2017)
+primaryColor = "#009640"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F6F6F6"
+textColor = "#1D1D1B"
 font = "sans serif"
 
 [server]

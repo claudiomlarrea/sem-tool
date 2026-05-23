@@ -22,10 +22,57 @@ from sem_tool.web.pipeline import (
 )
 
 st.set_page_config(
-    page_title="sem-tool",
+    page_title="sem-tool · UCCuyo",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded",
+)
+
+# Colores UCCuyo (Manual identidad visual v1.0 — extraídos del PDF institucional)
+UCC_VERDE = "#009640"
+UCC_AZUL = "#312783"
+UCC_GRIS_60 = "#878787"
+UCC_NEGRO = "#1D1D1B"
+UCC_FONDO = "#F6F6F6"
+
+st.markdown(
+    f"""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+    html, body, [class*="css"] {{
+        font-family: 'Montserrat', sans-serif;
+    }}
+    [data-testid="stSidebar"] {{
+        background: linear-gradient(180deg, {UCC_AZUL} 0%, #252060 100%);
+    }}
+    [data-testid="stSidebar"] * {{
+        color: #ffffff !important;
+    }}
+    [data-testid="stSidebar"] .stMarkdown strong {{
+        color: #ffffff !important;
+    }}
+    div[data-testid="stSidebarNav"] {{
+        background-color: transparent;
+    }}
+    .ucc-header {{
+        border-left: 5px solid {UCC_VERDE};
+        padding-left: 0.75rem;
+        margin-bottom: 0.25rem;
+    }}
+    .ucc-header h1 {{
+        color: {UCC_AZUL};
+        font-weight: 700;
+        margin: 0;
+        font-size: 1.75rem;
+    }}
+    .ucc-header p {{
+        color: {UCC_GRIS_60};
+        margin: 0;
+        font-size: 0.95rem;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True,
 )
 
 PREVIEW_SHEETS_CB = [
@@ -46,8 +93,8 @@ PREVIEW_SHEETS_PLS = [
 
 
 def _sidebar() -> None:
-    st.sidebar.title("sem-tool")
-    st.sidebar.caption("CB-SEM (EQS) · PLS-SEM (SmartPLS) · Excel")
+    st.sidebar.markdown("### sem-tool")
+    st.sidebar.caption("CB-SEM (EQS) · PLS-SEM (SmartPLS)")
     st.sidebar.markdown(
         """
         **Flujo**
@@ -55,8 +102,6 @@ def _sidebar() -> None:
         2. Rellenar hoja `Datos` y modelos
         3. Ejecutar análisis
         4. Descargar Excel con resultados
-
-        [Repositorio GitHub](https://github.com/claudiomlarrea/sem-tool) · Taller UIC Frederic Marimon
         """
     )
 
@@ -205,27 +250,10 @@ def _tab_vista_previa() -> None:
 
 
 def _tab_ayuda() -> None:
-    st.header("GitHub y despliegue")
+    st.header("Ayuda")
     st.markdown(
         """
-        ### Repositorio en GitHub
-        1. Cree un repositorio vacío en [github.com/new](https://github.com/new).
-        2. En la carpeta del proyecto:
-        ```bash
-        git add .
-        git commit -m "sem-tool: CLI, Streamlit y documentación"
-        git branch -M main
-        git remote add origin https://github.com/claudiomlarrea/sem-tool.git
-        git push -u origin main
-        ```
-
-        ### App en Streamlit Cloud (gratis)
-        1. [share.streamlit.io](https://share.streamlit.io) → **New app**
-        2. Repositorio: `claudiomlarrea/sem-tool`, rama `main`
-        3. **Main file path**: `streamlit_app.py`
-        4. Python 3.9+; dependencias en `requirements.txt`
-
-        ### Local
+        ### Uso local
         ```bash
         python3 -m pip install -e ".[web]"
         streamlit run streamlit_app.py
@@ -236,17 +264,29 @@ def _tab_ayuda() -> None:
         python3 -m sem_tool init -o estudio.xlsx
         python3 -m sem_tool run-all estudio.xlsx --bootstraps 500 --processes 2
         ```
+
+        ### Ejemplo restaurante (20 clientes)
+        ```bash
+        python3 -m sem_tool ejemplo-restaurante -o encuesta_restaurante_20.xlsx
+        ```
         """
     )
 
 
 def main() -> None:
     _sidebar()
-    st.title("sem-tool")
-    st.caption("Ecuaciones estructurales con flujo Excel · CB-SEM y PLS-SEM")
+    st.markdown(
+        """
+        <div class="ucc-header">
+            <h1>sem-tool</h1>
+            <p>Ecuaciones estructurales · CB-SEM y PLS-SEM · UCCuyo</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     tab1, tab2, tab3, tab4 = st.tabs(
-        ["Plantilla", "Analizar", "Vista previa", "Ayuda / GitHub"]
+        ["Plantilla", "Analizar", "Vista previa", "Ayuda"]
     )
     with tab1:
         _tab_plantilla()
