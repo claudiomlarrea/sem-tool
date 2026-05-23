@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.eggs/
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.DS_Store
+examples/_pls_part.xlsx
+
+# Libros de trabajo locales (no subir datos de encuesta)
+taller_*.xlsx
+mi_*.xlsx
+*_resultados.xlsx
+!examples/*.xlsx
+!templates/*.xlsx

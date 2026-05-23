@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sem-tool"
+version = "0.1.0"
+description = "CB-SEM (EQS-style) and PLS-SEM (SmartPLS-style) with Excel workflow"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pandas>=1.5",
+    "openpyxl>=3.1",
+    "numpy>=1.23",
+    "scipy>=1.9",
+    "semopy>=2.3",
+    "plspm>=0.5.7",
+    "typer>=0.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "python-pptx>=0.6.21"]
+web = ["streamlit>=1.28"]
+
+[project.scripts]
+sem-tool = "sem_tool.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: tests that run full SEM examples"]

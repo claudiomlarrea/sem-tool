@@ -1,0 +1,618 @@
+
+=== SLIDE 1 ===
+Structural Equation Modeling (SEM) usingEQS software andSmart-PLS CB (co-variance based)
+Marta Mas
+Frederic Marimon
+
+
+mmas@uic.es // 679 21 70 79 
+fmarimon@uic.es // 660 11 70 64
+
+=== SLIDE 2 ===
+Index
+Introduction
+Variance analysis
+Types of variables
+Types of equations
+Rules for determining the model parameters
+Definition of the model
+Laws of covariance
+Model Fitness
+Model Identification
+The logic of the model fitness
+How EQS and Smart-PLS work
+Examples
+(SEM) Bagozzi
+Multiple regression (SPSS vs EQS) [reference = f (age, education)]
+Confirmatory Factor Analysis
+Lagrange test
+
+=== SLIDE 3 ===
+Index
+And last but not least...
+
+Reading an article!
+…and on top of that,
+understanding it!
+
+=== SLIDE 4 ===
+Introduction
+Objectives of the Workshop
+
+Learning basics of SEM (based on covariances)
+Analysis of Complex Models using
+EQS
+Smart-PLS (BC)
+
+=== SLIDE 5 ===
+Introduction
+In a Structural Model
+
+Causal relationships are represented by equations
+It assumes that there are errors (measurement and structural): DATA = MODEL + RESIDUAL
+
+=== SLIDE 6 ===
+Variance analysis
+µ = 6,51
+2 = 9,35
+
+=== SLIDE 7 ===
+Variance analysis
+Media ( Y )
+Yobs
+Error
+Varianza explicada por el modelo
+Varianza de la variable independiente
+Y
+X
+
+=== SLIDE 8 ===
+Variance analysis
+Satisfaction
+Quality
+
+=== SLIDE 9 ===
+Variance analysis
+
+=== SLIDE 10 ===
+Types of variables
+V
+F
+V
+E
+F
+D
+Observed variables, which are actually measured by the researcher
+Latent variables or Factor no observable
+Measurement error associated with observed variable
+Residual error (disturbance) in the prediction of a latent factor
+F1
+F2
+Covariance
+
+=== SLIDE 11 ===
+Types of variables
+Age
+Weight
+The coefficient measures “kg/year”
+
+How much does weight increase in one year… 
+
+The standardized coefficient allows to compare with other causes… (quality of diet, for instance)
+
+=== SLIDE 12 ===
+Types of variables
+Solución no estandarizada 
+V2  =   1.005*V1    + 1.000 E2  
+              .033      (error estándard)               
+          30.507@  (t-value)
+Solución estandarizada
+V2  =  .995*V1 + .098 E2      r2 = .990
+Satisfaction
+Quality
+
+=== SLIDE 13 ===
+Types of variables
+F1
+F2
+V1
+V2
+V3
+V4
+V5
+E1
+E2
+E3
+E4
+E5
+D2
+Hypothesis: The satisfaction of a service (F2) is related to the quality of service (F1)DATA: 3 observed variables of quality and 2 of satisfaction “Latent“ variables : F1 quality and F2 satisfactionMeasurement errors: E1, E2, E3, E4, E5Structural errors: D2
+
+=== SLIDE 14 ===
+Types of variables
+Dependent variable: one that receives a one-way arrow
+
+Independent variable: not receiving unidirectional arrow
+
+All dependent variable have assigned an error (measurement error if it is an observed variable and a disturbance if it is latent)
+
+There is no two-way arrow between dependent variables
+
+=== SLIDE 15 ===
+Types of equations
+F1
+F2
+V1
+V2
+V3
+V4
+V5
+E1
+E2
+E3
+E4
+E5
+D2
+Equations:
+
+V1 = α1F1 + E1
+V2 = α2F1 + E2
+V3 = α3F1 + E3
+V4 = α4F2 + E4
+V5 = α5F2 + E5
+F2 = βF1 + D2
+Dependientes variables : V1, V2, V3, V4, V5, F2 		[6]
+Independientes variables : E1, E2, E3, E4, E5, F1, D2 	[7]
+
+=== SLIDE 16 ===
+Rules for determining the model parameters
+Rule 1: All the variances of the independent variables are parameters
+Rule 2: All covariances between independent variables are parameters
+Rule 3: All load factors between latent and its indicators are parameters
+Rule 4: All regression coefficients between observed or latent variables are parameters
+Rule 5: (i) The variances of dependent variables, (ii) the covariance between dependent variables and (iii) the covariance between dependent and independent variables, are never parameters (are explained by other parameters of the model)
+Rule 6: For each latent variable must be set its metric:
+For independent latent two ways:
+Set its variance set to a constant (usually 1)
+Fix a load factor between latent and its factor (usually 1)
+For the latent dependent only one way: fix a coefficient between it and one of the observed variables to a constant (usually 1)
+
+=== SLIDE 17 ===
+Definition of the model
+An equation for each variable (latent or observable) that receives a one-way arrow (dependent variables) [6]
+So many variances as independent variables [7]
+So many covariances as two-way arrows [0]
+F1
+F2
+V1
+V2
+V3
+V4
+V5
+E1
+E2
+E3
+E4
+E5
+D2
+1
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+1
+*
+
+=== SLIDE 18 ===
+Definition of the model
+Measurement model
+Structural model
+7 independent variables: 5 errors + 1disturbance + F1
+6 dependent variables: 5 observed+ F2
+11 Parameters:
+7 variances of independent variables
+3 coefficients of latent factors with indicators
+1 regression coefficient
+Freedom degrees = 5 * 6/2 - 11 = 4
+
+=== SLIDE 19 ===
+Definition of the model
+V1 = 1F1 + E1
+V2 = *F1 + E2
+V3 = *F1 + E3
+V4 = 1F2 + E4
+V5 = *F2 + E5
+F2 = *F1 + D2
+F1
+F2
+V1
+V2
+V3
+V4
+V5
+E1
+E2
+E3
+E4
+E5
+D2
+1
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+1
+E1 = *
+E2 = *
+E3 = *
+E4 = *
+E5 = *
+F1 = *
+D2 = *
+*
+Quality measurement scale model
+Satisfaction measurement scale model
+Structural model
+Variances of independent variables
+Freedom degrees = (5 * 6)/2 – 11 = 4
+Model Equations
+
+=== SLIDE 20 ===
+Definition of the model
+We add covariance between E1 and E3, we introduce a parameter, and we lose one degree of freedom
+Grados de libertad = (5*6)/2 – 12 = 3
+
+=== SLIDE 21 ===
+Variance and covariance laws
+
+=== SLIDE 22 ===
+Variance and covariance laws
+Law 1:
+	Cov (X,X) = Var (X)
+
+Law 2:
+	Cov (aX + bY, cZ + dU) =
+	ac Cov(X,Z) + ad Cov(X,U) + bc Cov(Y,Z) + bd Cov (Y,U)
+
+Law 3:
+	Var(aX + bY) = a2 Var(X) + b2 Var(Y) + 2ab Cov (X,Y)
+
+Law 4: (if X and Y are uncorrelated) 
+	Var(aX + bY) = a2 Var(X) + b2 Var(Y)
+
+=== SLIDE 23 ===
+Model Fitness
+Cov (v1,v2) = Cov(ʎ1F + E1 , ʎ2F + E2) =
+ʎ1ʎ2Var(F) + ʎ1Cov(F,E2) + ʎ2Cov(F,E1) + Cov(E1,E2) =
+ʎ1ʎ21          + ʎ10              + ʎ20               + 0 = ʎ1ʎ2
+
+Var(V1) = Cov(ʎ1F + E1 , ʎ1F + E1) = ʎ12 + Cov(E1,E1) = ʎ12 + θ1
+
+Var(V2) = Cov(ʎ2F + E2 , ʎ2F + E2) = ʎ22 + Cov(E2,E2) = ʎ22 + θ2
+F
+V1
+V2
+E1
+E2
+ʎ1
+ʎ2
+θ1
+1
+The model has 4 parameters
+θ2
+
+=== SLIDE 24 ===
+Model Fitness
+Matriz ∑
+(structure induced by the model)
+Matriz S
+(observed)
+Three equations are established and there are 4 unknowns / Infinite solutions
+
+ʎ12 + θ1 = Var (V1)
+ʎ22 + θ2 = Var (V2)
+ʎ1ʎ2 = Cov (V1,V2)
+
+Degree of freedom = number of data - parameters = (n)(n+1)/2  -  parameters
+Degree of freedom = (2)(3)/2 - 4 = 3 – 4 < 0 Under idetified model
+
+=== SLIDE 25 ===
+3 equations 
+4 unknowns (parameters) / Infinite solutions
+
+Freedom degrees= (2)(3)/2 - 4 = 3 – 4 < 0
+Model sub-identified
+
+ʎ12 + θ1 = Var (V1) 	ʎ1ʎ2 = Cov (V1,V2)
+ʎ22 + θ2 = Var (V2)
+
+=== SLIDE 26 ===
+6 equations 
+6 unknowns (parameters) / unique solution
+
+Freedom degrees= (3)(4)/2 - 6 = 0
+Model just-identified
+
+ʎ12 + θ1 = Var (V1) 	ʎ1ʎ2 = Cov (V1,V2)
+ʎ22 + θ2 = Var (V2) 	ʎ1ʎ3 = Cov (V1,V3)
+ʎ32 + θ3 = Var (V3) 	ʎ2ʎ3 = Cov (V2,V3)
+
+=== SLIDE 27 ===
+10 equations 
+8 unknowns (parameters) / it allows to refuse the model
+
+Freedom degree= (4)(5)/2 - 8 = 2 > 0 
+Model over-identified
+
+ʎ12 + θ1 = Var (V1) 	ʎ1ʎ2 = Cov (V1,V2)
+ʎ22 + θ2 = Var (V2) 	ʎ1ʎ3 = Cov (V1,V3)
+ʎ32 + θ3 = Var (V3) 	ʎ2ʎ3 = Cov (V2,V3)
+ʎ42 + θ4 = Var (V4) 	ʎ1ʎ4 = Cov (V1,V4)
+			ʎ2ʎ4 = Cov (V2,V4)
+			ʎ3ʎ4 = Cov (V3,V4)
+
+=== SLIDE 28 ===
+Adding a restriction  increases one degree of freedom: the researcher risks more; the model is more demanding.
+
+For instance: 1 = 2
+
+Adding an equation.
+    11 equations and 8 parameters to estimate  Freedom degrees = 3
+Model Fitness
+
+=== SLIDE 29 ===
+Model Fitness
+Degrees of freedom < 0 Infinites solutions
+Degrees of freedom = 0 Unique Solution
+Degrees of freedom > 0 ok
+Matrix S
+Observation
+Degrees of freedom= elements - parameters = (p)(p+1)/2  -  parameters
+
+=== SLIDE 30 ===
+Identification of the model
+Just identified model: number of data variances and covariances equals the number of parameters. The model yields an unique solution for all parameters, but scientifically it is not interesting because without degrees of freedom it never can be rejected.
+
+Overidentified model: positive degrees of freedom. It allows to reject the model. It allows to analyze the discrepancy between S and ∑ , thereby rendering it of scientific use.
+The aim in SEM then is specify overidetified models
+
+Underidetified model: infinite number of solutions. No useful at all…
+
+=== SLIDE 31 ===
+The logic of the model fitness
+Get the estimated parameters to minimize the difference between S and Σ
+Set a Fit function F (S, Σ) that measures the difference: F = f (S - Σ) = f (parameters)
+An iterative algorithm minimizes F
+Rule of "thumb" to determine adequate sample size, 10 times the number of parameters
+The statistic T = (n-1) * Fmin is defined 
+"N" is sample size
+F is the minimum of the fit function
+"T" is asymptotically distributed as χ2 with the same degrees of freedom that the model
+If the model is correct, it is expected that the differences between S and Σ are small: the value of χ2 will be low and high probability (p-value> .05)
+
+=== SLIDE 32 ===
+The logic of the model fitness
+Estimation methods to calculate parameters and hence the Chi-squared:
+method of Maximum Likelihood (ML)method of Generalized Least Squares (GLS)method of Unweighted Least Squares (ULS)
+
+The c2 statistics are shown as:
+c2 ML = (n -1) [Tr (Så-1) - (p + q) ln | å | - ln | S |
+c2 GLS = ( n - 1) [0,5 Tr ((S - å) S -1) 2]
+c2 ULS = (n- 1) [0,5 Tr ((S - å)2)]
+
+Where:
+Tr= Trace
+Ln= natural logarithm
+t = number of estimated parameters.
+n = number of cases.
+p + q = number of observed variables
+fd (freedom degrees) = 0,5 (p + q) (p + q + 1) – t
+S = Matrix of observed covariances (initials)
+å = Matrix of covariances generated.
+
+=== SLIDE 33 ===
+Absolute fit measures:
+Test χ2 and significance level (p > 0.05)
+Test χ2Satorra-Bentler and significance level (p > 0.05) : works well in a variety of 						 distribution situations
+Goodness of Fit Index (GFI) (High > 0.9 )
+Root Mean Squared Residual (RMSR) (low)
+Root Mean Squared Error of Approximation (RMSEA) (< 0.08)
+
+Incremental fit measures (it compares with respect the null model):
+Bentler Bonnet Normed Fit Index (NFI o Δ) (> 0.9)
+Bentler Bonnet Non Normed Fit Index (NNFI o Δ) (> 0.9)
+Adjusted Goodness of Fit Index (AGFI) (> 0.9)
+Comparative Fit Index (CFI) (> 0.9 or even 0.95)
+
+Parsimonious fit measures (quality of fit with respect the number of estimated coefficients):
+Normed Chi-Square (χ2/ d.f. ) (up to 5)
+
+RECOMMENDED SAMPLE SIZE: At least 5 times the number of free parameters to be estimated
+The logic of the model fitness
+Hu L, Bentler PM. Cutoff Criteria for Fit Indexes in Covariance Structure Analysis: Conventional Criteria versus New Alternatives. Structural Equation Modeling 1999;6(1):1-55.
+
+=== SLIDE 34 ===
+The logic of the model fitness
+Assessing model fit
+Null hyp: there will be no difference between the model and the data
+Or the model will fit the data
+Alternative hyp: there will be a difference between the model and the data
+Or the model will not fit the data
+So, if the model fits well there will be no significant difference between the model and the data
+Note: chi-square test is sensitive to large N
+
+=== SLIDE 35 ===
+How EQS works…
+Diagrammer
+Build EQS
+*.eqx file
+Model file
+*.eds file
+Diagramm file
+
+=== SLIDE 36 ===
+How EQS works… Output EQS
+3RD STAGE OF COMPUTATION REQUIRED    791013 WORDS OF MEMORY.
+PROGRAM ALLOCATED   2000000 WORDS
+
+DETERMINANT OF INPUT MATRIX IS    .10262D-06
+
+PARAMETER ESTIMATES APPEAR IN ORDER,
+NO SPECIAL PROBLEMS WERE ENCOUNTERED DURING OPTIMIZATION.
+
+=== SLIDE 37 ===
+How EQS works… Output EQS
+GOODNESS OF FIT SUMMARY FOR METHOD = ML    
+
+  INDEPENDENCE MODEL CHI-SQUARE        =   13718.182 ON   231 DEGREES OF FREEDOM
+
+  INDEPENDENCE AIC =   13256.182   INDEPENDENCE CAIC =   11913.785
+         MODEL AIC =     672.400          MODEL CAIC =    -518.906
+
+  CHI-SQUARE =     1082.400 BASED ON     205 DEGREES OF FREEDOM
+  PROBABILITY VALUE FOR THE CHI-SQUARE STATISTIC IS       .00000
+
+  THE NORMAL THEORY RLS CHI-SQUARE FOR THIS ML SOLUTION IS       1284.011.
+
+  FIT INDICES
+  -----------
+  BENTLER-BONETT     NORMED FIT INDEX =      .921
+  BENTLER-BONETT NON-NORMED FIT INDEX =      .927
+  COMPARATIVE FIT INDEX (CFI)         =      .935
+  BOLLEN'S          (IFI) FIT INDEX   =      .935
+  MCDONALD'S        (MFI) FIT INDEX   =      .617
+  JORESKOG-SORBOM'S  GFI  FIT INDEX   =      .886
+  JORESKOG-SORBOM'S AGFI  FIT INDEX   =      .859
+  ROOT MEAN-SQUARE RESIDUAL (RMR)     =      .053
+  STANDARDIZED RMR                    =      .050
+  ROOT MEAN-SQUARE ERROR OF APPROXIMATION (RMSEA)    =      .069
+  90% CONFIDENCE INTERVAL OF RMSEA  (        .065,          .073)
+
+=== SLIDE 38 ===
+How EQS works… Output EQS
+GOODNESS OF FIT SUMMARY FOR METHOD = ROBUST
+
+  ROBUST INDEPENDENCE MODEL CHI-SQUARE =    7396.629 ON   231 DEGREES OF FREEDOM
+
+  INDEPENDENCE AIC =    6934.629   INDEPENDENCE CAIC =    5592.231
+         MODEL AIC =     342.437          MODEL CAIC =    -848.868
+
+  SATORRA-BENTLER SCALED CHI-SQUARE =    752.4374 ON     205 DEGREES OF FREEDOM
+  PROBABILITY VALUE FOR THE CHI-SQUARE STATISTIC IS       .00000
+
+  RESIDUAL-BASED TEST STATISTIC                      =   579.448
+  PROBABILITY VALUE FOR THE CHI-SQUARE STATISTIC IS       .00000
+
+  YUAN-BENTLER RESIDUAL-BASED TEST STATISTIC         =   353.719
+  PROBABILITY VALUE FOR THE CHI-SQUARE STATISTIC IS       .00000
+
+  YUAN-BENTLER RESIDUAL-BASED F-STATISTIC     =      2.191
+  DEGREES OF FREEDOM  =                         205,   703
+  PROBABILITY VALUE FOR THE F-STATISTIC IS          .00000
+
+  FIT INDICES
+  -----------
+  BENTLER-BONETT     NORMED FIT INDEX =      .898
+  BENTLER-BONETT NON-NORMED FIT INDEX =      .914
+  COMPARATIVE FIT INDEX (CFI)         =      .924
+  BOLLEN'S          (IFI) FIT INDEX   =      .924
+  MCDONALD'S        (MFI) FIT INDEX   =      .740
+  ROOT MEAN-SQUARE ERROR OF APPROXIMATION (RMSEA)    =      .054
+  90% CONFIDENCE INTERVAL OF RMSEA  (        .050,          .058)
+
+=== SLIDE 39 ===
+How EQS works… Output EQS
+MEASUREMENT EQUATIONS WITH STANDARD ERRORS AND TEST STATISTICS
+STATISTICS SIGNIFICANT AT THE 5% LEVEL ARE MARKED WITH @.
+(ROBUST STATISTICS IN PARENTHESES)
+
+
+
+V1    =V1  =   1.000 F1    + 1.000 E1  
+                                      
+V2    =V2  =   1.002*F1    + 1.000 E2  
+                   .035               
+                 28.323@              
+               (   .034)                                                        
+               ( 29.382@
+
+=== SLIDE 40 ===
+How Smart-PLS works… Output Smart-PLS
+
+=== SLIDE 41 ===
+EQS Output
+
+GOODNESS OF FIT SUMMARY FOR METHOD = ML    
+
+INDEPENDENCE MODEL CHI-SQUARE = 1637.161
+ON 21 DEGREES OF FREEDOM
+
+INDEPENDENCE AIC =    1595.161   INDEPENDENCE CAIC = 1481.895
+MODEL AIC = 19.653 MODEL CAIC = -50.464
+
+CHI-SQUARE = 45.653 BASED ON 13 DEGREES OF FREEDOM
+PROBABILITY VALUE FOR THE CHI-SQUARE STATISTIC IS 0.00002
+NORMAL THEORY RLS CHI-SQUARE FOR ML SOLUTION =  44.156
+PROBABILITY VALUE FOR THE CHI-SQUARE STATISTIC IS 0.00003
+
+  FIT INDICES
+  -----------
+  BENTLER-BONETT     NORMED FIT INDEX =     0.972
+  BENTLER-BONETT NON-NORMED FIT INDEX =     0.967
+  COMPARATIVE FIT INDEX (CFI) = 0.980
+  BOLLEN'S (IFI) FIT INDEX = 0.980
+  MCDONALD'S (MFI) FIT INDEX =  0.973
+  JORESKOG-SORBOM'S  GFI  FIT INDEX = 0.979
+  JORESKOG-SORBOM'S AGFI  FIT INDEX  = 0.955
+  ROOT MEAN-SQUARE RESIDUAL (RMR) = 0.063
+  STANDARDIZED RMR =  0.050
+  ROOT MEAN-SQUARE ERROR OF APPROXIMATION (RMSEA) = 0.065
+  90% CONFIDENCE INTERVAL OF RMSEA (0.045, 0.086)
+χ2 / degrees of freedom = 45.653 / 13 = 3.512
+
+=== SLIDE 42 ===
+Examples
+Basic example with two constructs 
+Full research model (Bagozzi, 1992)
+Multiple regression
+Path analysis (case studies; mediation analysis)
+Lagrange Test (Nested Models)
+
+=== SLIDE 43 ===
+Test Lagrange (caso Bagozzi)
+The test indicates that if we introduce this parameter (V3, F2) and we lose a degree of freedom, Chi square will decrease by 8,855
+CHI-SQUARE = 14.530
+BASED ON 8 DEGREES OF FREEDOM
+P-VALUE FOR THE CHI-SQUARE STATISTIC = .06895
+LAGRANGE MULTIPLIER TEST (FOR ADDING PARAMETERS)
+  ORDERED UNIVARIATE TEST STATISTICS:             
+                                                   HANCOCK             STANDAR-
+                                  CHI-               8 DF   PARAMETER   DIZED 
+   NO    CODE     PARAMETER      SQUARE     PROB.    PROB.    CHANGE    CHANGE
+   --   ------    ---------      ------     -----  -------- ---------  --------
+    1    2  20        V3,F2       8.855      .003      .355      .358      .122
+    2    2  20        V6,F2       1.509      .219      .993     -.127     -.048
+    3    2  20        V5,F2        .981      .322      .998     -.087     -.038
+    4    2  20        V4,F2        .010      .921     1.000      .010      .004
+    5    2   0        F1,F1        .000     1.000     1.000      .000      .000
+CHI-SQUARE = 5.426
+BASED ON 7 DEGREES OF FREEDOM
+P-VALUE FOR THE CHI-SQUARE STATISTIC = .60809
+
+=== SLIDE 44 ===
+Bibliografía
+Byrne, B. M. (2013). Structural equation modeling with EQS: Basic concepts, applications, and programming. Routledge.
+Raykov, T., & Marcoulides, G. A. (2012). A first course in structural equation modeling. Routledge.
+Bentler, P. M. (2004). Structural Equation Modeling with EQS. User Manual, Encino, California.
